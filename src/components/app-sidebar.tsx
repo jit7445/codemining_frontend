@@ -17,15 +17,6 @@ import { IoLogoJavascript } from "react-icons/io";
 import { FaJava } from "react-icons/fa";
 import { FiSettings } from "react-icons/fi";
 
-
-
-// import { FiSettings } from "react-icons/fi"
-// import { AiOutlineJavaScript } from "react-icons/ai";
-// import { FaJava } from "react-icons/fa6";
-// import { IoLogoJavascript } from "react-icons/io";
-// import { Icon } from "lucide-react";
-
-// Menu items.
 const items = [
   {
     title: "node",

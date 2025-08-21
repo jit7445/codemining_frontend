@@ -7,6 +7,7 @@ import { AppSidebar } from "@/components/app-sidebar";
 import Navbar from "@/components/Navbar";
 import ToasterContext from "./context/ToasterContext";
 import { ThemeProvider } from "./theme-provider";
+import Assist from "@/components/aigent/Assist";
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -51,11 +52,13 @@ export default async function RootLayout({
             <div className="flex-grow w-full mt-4 rounded-lg shadow-lg p-6">
               {children}
             </div>
+            
+             <Assist/>
           </div>
         </main>
       {/* </div> */}
     </SidebarProvider>
-      
+      {/* <Assist/> */}
         </ThemeProvider>
       </body>
     </html>

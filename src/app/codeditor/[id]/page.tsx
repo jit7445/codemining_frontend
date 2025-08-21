@@ -14,8 +14,6 @@ import { Loader, Play, TriangleAlert } from "lucide-react";
 import { codeSnippets, languageOptions } from "@/config/config";
 import toast from "react-hot-toast";
 import { usePathname } from "next/navigation";
-// import Navbar from "@/components/Navbar";
-
 export default function EditorComponent() {
   const { theme } = useTheme();
   const pathname = usePathname();
@@ -51,7 +49,7 @@ export default function EditorComponent() {
 
   async function executeCode() {
     setLoading(true);
-
+console.log("sourceCode:", sourceCode);
     try {
       const result = await fetch('http://localhost:3000/execute', {
         method: 'POST',

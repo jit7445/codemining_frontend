@@ -8,7 +8,7 @@ interface ButtonProps {
   secondary?: boolean;
   danger?: boolean;
   disabled?: boolean;
-  className?: string; // Add className prop
+  className?: string; 
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -19,7 +19,7 @@ const Button: React.FC<ButtonProps> = ({
   secondary,
   danger,
   disabled,
-  className, // Destructure className prop
+  className,
 }) => {
   return ( 
     <button

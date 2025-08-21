@@ -85,14 +85,14 @@ export default function EditorComponent() {
  
     
       <div className=" p-3 rounded-2xl">
-      <div className="flex items-center justify-between pb-3">
+      <div className="flex items-center justify-between pb-3 o">
         <Button className="scroll-m-20 text-2xl font-semibold tracking-tight first:mt-0">
           {languageOption.language}
         </Button>
       </div>
       <ResizablePanelGroup
   direction="vertical"
-  className="min-h-[70rem] max-w-md rounded-lg border md:min-w-[80rem]"
+  className="min-h-[70rem] max-w-md rounded-lg border md:min-w-[80rem] opacity-1"
 >
           <ResizablePanel defaultSize={50} minSize={35}>
             <Editor
@@ -152,3 +152,57 @@ export default function EditorComponent() {
    
   );
 }
+// 'use client';
+
+// import { useChat } from 'ai/react';
+
+// export default function Chat() {
+//   const { messages, input, handleInputChange, handleSubmit } = useChat();
+//   console.log("Received messages:", messages);
+//   console.log("Received input:", input);
+//   return (
+//     <div className="min-h-screen bg-white">
+//       <div className="mx-auto w-full max-w-2xl py-8 px-4">
+//         <div className="space-y-4 mb-4">
+//           {messages.map(m => (
+//             <div 
+//               key={m.id} 
+//               className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}
+//             >
+//               <div 
+//                 className={`
+//                   max-w-[80%] rounded-lg px-4 py-2
+//                   ${m.role === 'user' 
+//                     ? 'bg-blue-100 text-black' 
+//                     : 'bg-gray-100 text-black'}
+//                 `}
+//               >
+//                 <div className="text-xs text-gray-500 mb-1">
+//                   {m.role === 'user' ? 'You' : 'Assistant'}
+//                 </div>
+//                 <div className="text-sm whitespace-pre-wrap">
+//                   {m.content}
+//                 </div>
+//               </div>
+//             </div>
+//           ))}
+//         </div>
+
+//         <form onSubmit={handleSubmit} className="flex gap-4">
+//           <input
+//             value={input}
+//             onChange={handleInputChange}
+//             placeholder="Type your message..."
+//             className="flex-1 rounded-lg border border-gray-300 px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-[#f55036]"
+//           />
+//           <button 
+//             type="submit"
+//             className="rounded-lg bg-[#f55036] px-4 py-2 text-white hover:bg-[#d94530] focus:outline-none focus:ring-2 focus:ring-[#f55036]"
+//           >
+//             Send
+//           </button>
+//         </form>
+//       </div>
+//     </div>
+//   );
+// }
