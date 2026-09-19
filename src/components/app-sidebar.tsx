@@ -1,4 +1,6 @@
-'use client';
+"use client";
+
+import React from "react";
 import {
   Sidebar,
   SidebarContent,
@@ -9,143 +11,181 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarHeader,
-
-} from "@/components/ui/sidebar"
-import Image from "next/image";
-import { SiPython, SiCplusplus, SiC, SiRuby, SiPhp, SiGo, SiRust } from "react-icons/si";
+} from "@/components/ui/sidebar";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import {
+  SiPython,
+  SiCplusplus,
+  SiC,
+  SiRuby,
+  SiPhp,
+  SiGo,
+  SiRust,
+} from "react-icons/si";
 import { IoLogoJavascript } from "react-icons/io";
 import { FaJava } from "react-icons/fa";
 import { FiSettings } from "react-icons/fi";
+import { Code2, BookOpen } from "lucide-react";
 
-const items = [
+const languages = [
   {
-    title: "node",
+    title: "JavaScript",
     url: "/codeditor/javascript",
     icon: IoLogoJavascript,
     language: "javascript",
-    version: "18.15.0",
-    aliases: ["node-javascript", "node-js", "javascript", "js"],
-    runtime: "node",
-  },
-  {
-    title: "PHP",
-    url: "/codeditor/php",
-    icon: SiPhp,
-    language: "php",
-    version: "8.2.3",
-    aliases: [],
+    color: "text-amber-400",
   },
   {
     title: "Python",
     url: "/codeditor/python",
     icon: SiPython,
     language: "python",
-    version: "3.10.0",
-    aliases: ["py", "py3", "python3", "python3.10"],
+    color: "text-blue-400",
   },
   {
-    title: "Ruby",
-    url: "/codeditor/ruby",
-    icon: SiRuby,
-    language: "ruby",
-    version: "3.0.1",
-    aliases: ["ruby3", "rb"],
-  },
-  {
-    title: "Rust",
-    url: "/codeditor/rust",
-    icon: SiRust,
-    language: "rust",
-    version: "1.68.2",
-    aliases: ["rs"],
-  },
-  {
-    title: "C#",
-    url: "/codeditor/csharp",
-    icon: FiSettings, // Replace with C# icon if available
-    language: "csharp",
-    version: "6.12.0",
-    aliases: ["mono", "mono-csharp", "mono-c#", "mono-cs", "c#", "cs"],
-    runtime: "mono",
-  },
-  {
-    title: "cpp",
+    title: "C++",
     url: "/codeditor/cpp",
     icon: SiCplusplus,
-    language: "c++",
-    version: "10.2.0",
-    aliases: ["cpp", "g++"],
-    runtime: "gcc",
-  },
-  {
-    title: "Go",
-    url: "/codeditor/go",
-    icon: SiGo,
-    language: "go",
-    version: "1.16.2",
-    aliases: ["go", "golang"],
+    language: "cpp",
+    color: "text-sky-400",
   },
   {
     title: "Java",
     url: "/codeditor/java",
     icon: FaJava,
     language: "java",
-    version: "15.0.2",
-    aliases: [],
+    color: "text-orange-400",
+  },
+  {
+    title: "Go",
+    url: "/codeditor/go",
+    icon: SiGo,
+    language: "go",
+    color: "text-cyan-400",
+  },
+  {
+    title: "Rust",
+    url: "/codeditor/rust",
+    icon: SiRust,
+    language: "rust",
+    color: "text-amber-600",
+  },
+  {
+    title: "PHP",
+    url: "/codeditor/php",
+    icon: SiPhp,
+    language: "php",
+    color: "text-indigo-400",
+  },
+  {
+    title: "Ruby",
+    url: "/codeditor/ruby",
+    icon: SiRuby,
+    language: "ruby",
+    color: "text-rose-500",
   },
   {
     title: "C",
     url: "/codeditor/c",
     icon: SiC,
     language: "c",
-    version: "10.2.0",
-    aliases: ["gcc"],
-    runtime: "gcc",
+    color: "text-blue-500",
   },
   {
-    title: "Settings",
-    url: "/codeditor/settings",
+    title: "C#",
+    url: "/codeditor/csharp",
     icon: FiSettings,
+    language: "csharp",
+    color: "text-purple-400",
   },
 ];
 
 export function AppSidebar() {
+  const pathname = usePathname();
+
   return (
-   
-    <Sidebar collapsible="icon">
-       <SidebarHeader>
-    <SidebarMenu>
-      <SidebarMenuItem>
-      <SidebarMenuButton asChild>
-                    <a href="/codeditor" className="flex items-center txt-xl gap-2">
-                      <Image src="/assets/image/logocodemining.webp" alt="logo" className='h-full'  width={50}
-       height={50}></Image>
-                      <span>Codemining</span>
-                    </a>
-                  </SidebarMenuButton>
-      </SidebarMenuItem>
-    </SidebarMenu>
-  </SidebarHeader>
-      <SidebarContent>
+    <Sidebar collapsible="icon" className="border-r border-slate-200 dark:border-zinc-800">
+      <SidebarHeader className="p-3 border-b border-slate-200/60 dark:border-zinc-800">
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton asChild size="lg" className="hover:bg-slate-100 dark:hover:bg-zinc-800">
+              <Link href="/codeditor/javascript" className="flex items-center gap-3">
+                <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white shadow-md shrink-0">
+                  <Code2 className="w-5 h-5" />
+                </div>
+                <div className="flex flex-col text-left">
+                  <span className="font-bold text-base tracking-tight text-slate-900 dark:text-white">
+                    CodeMining
+                  </span>
+                  <span className="text-[10px] text-slate-500 dark:text-slate-400">
+                    Multi-Language Compiler
+                  </span>
+                </div>
+              </Link>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarHeader>
+
+      <SidebarContent className="py-2">
         <SidebarGroup>
-          <SidebarGroupLabel className="text-xl">Language</SidebarGroupLabel>
+          <SidebarGroupLabel className="text-xs font-semibold uppercase tracking-wider text-slate-400 px-3 py-1">
+            Languages
+          </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {items.map((item) => (
-                <SidebarMenuItem key={item.title} className="text-">
-                  <SidebarMenuButton asChild>
-                    <a href={item.url} className="flex items-center  gap-2">
-                      <item.icon size={20} />
-                      <span>{item.title}</span>
-                    </a>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
+              {languages.map((item) => {
+                const isActive = pathname.toLowerCase() === item.url.toLowerCase();
+                const Icon = item.icon;
+
+                return (
+                  <SidebarMenuItem key={item.title}>
+                    <SidebarMenuButton
+                      asChild
+                      isActive={isActive}
+                      tooltip={item.title}
+                      className={`transition-all duration-150 rounded-lg px-3 py-2 ${
+                        isActive
+                          ? "bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 font-semibold shadow-sm"
+                          : "text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-zinc-800/80"
+                      }`}
+                    >
+                      <Link href={item.url} className="flex items-center gap-3 w-full">
+                        <Icon className={`w-4 h-4 shrink-0 ${item.color}`} />
+                        <span className="text-sm">{item.title}</span>
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                );
+              })}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        <SidebarGroup className="mt-auto">
+          <SidebarGroupLabel className="text-xs font-semibold uppercase tracking-wider text-slate-400 px-3 py-1">
+            Preferences
+          </SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton
+                  asChild
+                  isActive={pathname === "/codeditor/settings"}
+                  tooltip="Settings"
+                  className="rounded-lg px-3 py-2 hover:bg-slate-100 dark:hover:bg-zinc-800"
+                >
+                  <Link href="/codeditor/settings" className="flex items-center gap-3 w-full">
+                    <FiSettings className="w-4 h-4 text-slate-500" />
+                    <span className="text-sm">IDE Settings</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
     </Sidebar>
-   
-  )
+  );
 }
