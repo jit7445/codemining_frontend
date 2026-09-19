@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import {
   ResizableHandle,
   ResizablePanel,
@@ -18,16 +18,12 @@ import {
   Copy,
   Check,
   RotateCcw,
-  Sparkles,
-  Maximize2,
-  Minimize2,
   Code2,
   ChevronDown,
 } from "lucide-react";
 import { codeSnippets, languageOptions } from "@/config/config";
 import toast from "react-hot-toast";
 import { usePathname, useRouter } from "next/navigation";
-import Link from "next/link";
 
 interface CodeEditorProps {
   initialLanguage?: string;
@@ -120,7 +116,7 @@ export default function CodeEditor({ initialLanguage }: CodeEditorProps) {
     }
   }
 
-  async function executeCode() {
+  const executeCode = useCallback(async () => {
     setLoading(true);
     setHasError(false);
     setActiveTab("output");
@@ -152,20 +148,21 @@ export default function CodeEditor({ initialLanguage }: CodeEditorProps) {
         setHasError(true);
         toast.error("Execution error");
       }
-    } catch (err: any) {
+    } catch (err: unknown) {
       const endTime = performance.now();
+      const errorMessage = err instanceof Error ? err.message : String(err);
       setExecutionTime(`${((endTime - startTime) / 1000).toFixed(2)}s`);
       setHasError(true);
       setOutput([
         "⚠️ Connection Error: Could not reach the code execution service (localhost:3000).",
         "Make sure the backend server is running.",
-        `Details: ${err.message || err}`,
+        `Details: ${errorMessage}`,
       ]);
       toast.error("Failed to connect to execution engine");
     } finally {
       setLoading(false);
     }
-  }
+  }, [currentLangOption.language, sourceCode]);
 
   // Keyboard shortcut Ctrl+Enter / Cmd+Enter to run
   useEffect(() => {
@@ -177,7 +174,7 @@ export default function CodeEditor({ initialLanguage }: CodeEditorProps) {
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [sourceCode, currentLangOption]);
+  }, [executeCode]);
 
   return (
     <div className="flex flex-col h-full w-full max-w-full overflow-hidden bg-background text-foreground rounded-xl border border-slate-200 dark:border-zinc-800 shadow-xl">
@@ -366,7 +363,7 @@ export default function CodeEditor({ initialLanguage }: CodeEditorProps) {
                   ) : output.length === 0 ? (
                     <div className="flex flex-col items-center justify-center h-full text-slate-500 py-12 text-center">
                       <Code2 className="w-10 h-10 mb-2 opacity-30" />
-                      <p className="text-sm">Click "Run" or press ⌘↵ to execute code.</p>
+                      <p className="text-sm">Click &quot;Run&quot; or press ⌘↵ to execute code.</p>
                     </div>
                   ) : hasError ? (
                     <div className="space-y-2">

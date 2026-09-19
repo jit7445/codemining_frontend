@@ -26,7 +26,7 @@ import {
 import { IoLogoJavascript } from "react-icons/io";
 import { FaJava } from "react-icons/fa";
 import { FiSettings } from "react-icons/fi";
-import { Code2, BookOpen } from "lucide-react";
+import { Code2 } from "lucide-react";
 
 const languages = [
   {
